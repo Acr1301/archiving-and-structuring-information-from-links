@@ -1,0 +1,9 @@
+yt-dlp>=2024.4.9
+faster-whisper>=1.0.0
+requests>=2.31
+beautifulsoup4>=4.12
+trafilatura>=1.8
+instaloader>=4.11
+flask>=3.0
+pillow>=10.0
+imageio-ffmpeg>=0.4.9
