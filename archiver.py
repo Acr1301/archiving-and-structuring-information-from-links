@@ -3,7 +3,8 @@
 """
 Архиватор ссылок → Markdown
 ============================
-Вставьте ссылку (YouTube / другое видео, пост Telegram, статья) —
+Вставьте ссылку (YouTube / другое видео, пост Telegram, Instagram,
+пост Twitter/X, статья) —
 приложение сохранит содержимое в .md файл, разложенный по папкам:
 
     Архив/
@@ -1312,6 +1313,16 @@ def process_url(url: str, out_root: str, log, model_size: str,
 
     if "t.me" in host or "telegram.me" in host:
         return process_telegram(url, out_root, log, target_lang)
+
+    # Twitter/X и его зеркала (fxtwitter, vxtwitter, fixupx, nitter)
+    if ("twitter.com" in host
+            or host in ("x.com", "www.x.com", "mobile.x.com")
+            or "fixupx" in host or "fixvx" in host
+            or host.startswith("nitter.")):
+        from twitter_archiver import process_twitter
+        return process_twitter(url, out_root, log, model_size,
+                               save_video=save_video,
+                               target_lang=target_lang)
 
     if "instagram.com" in host:
         return process_instagram(url, out_root, log, model_size,
